@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>주문 페이지 (user-service)</title>
+  <script>
+    async function sendOrder() {
+      const selected = Array.from(document.querySelectorAll('input[name="product_ids"]:checked')).map(cb => cb.value);
+      if(selected.length === 0) {
+        alert("상품을 선택해 주세요!");
+        return;
+      }
+      const resp = await fetch('/order', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product_ids: selected})
+      });
+      const data = await resp.json();
+      const resultDiv = document.getElementById('result');
+      if(data.error){
+        resultDiv.innerText = "주문 처리 오류: " + data.error;
+      } else {
+        resultDiv.innerHTML = "<h3>주문 완료</h3><p>주문 ID: " + data.order_id + "</p><ul>" +
+          data.products.map(p => `<li>${p.id} - ${p.name}</li>`).join('') +
+          "</ul>";
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>상품 선택 및 주문 (user-service)</h1>
+  <form onsubmit="event.preventDefault(); sendOrder();">
+    {% for p in products %}
+      <input type="checkbox" name="product_ids" value="{{ p.id }}"> {{ p.name }}<br>
+    {% endfor %}
+    <br>
+    <button type="submit">주문하기</button>
+  </form>
+  <div id="result"></div>
+</body>
+</html>
+

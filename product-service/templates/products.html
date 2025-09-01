@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head><title>Product Service</title></head>
+<body>
+  <h1>상품 목록 (product-service)</h1>
+  <ul>
+    {% for p in products %}
+      <li>{{ p.id }} - {{ p.name }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
+
