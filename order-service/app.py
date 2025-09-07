@@ -1,7 +1,13 @@
+import instana
 from flask import Flask, request, jsonify
 import requests   # 누락 시 추가!
 
 app = Flask(__name__)
+
+#Instana
+print(dir(instana))
+tracer = instana.tracer  # instana 내 tracer 객체 직접 사용
+
 PRODUCT_SERVICE_URL = 'http://product-service:5001/api/products'
 
 @app.route('/create_order', methods=['POST'])

@@ -1,6 +1,11 @@
+import instana
 from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
+
+#Instana
+print(dir(instana))
+tracer = instana.tracer  # instana 내 tracer 객체 직접 사용
 
 products = [
     {"id": "p1", "name": "Apple"},

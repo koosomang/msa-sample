@@ -1,12 +1,14 @@
+import instana
 from flask import Flask, request, render_template, jsonify
 import requests
 
 app = Flask(__name__)
+
 ORDER_SERVICE_URL = 'http://order-service:5002/create_order'
 
 @app.route('/', methods=['GET'])
 def index():
-    # 상품 목록을 먼저 product-service에서 가져와 전달 가능 (선택형 UI용)
+    # Instana가 자동 계측하므로 별도 트레이스 코드 불필요
     products = requests.get('http://product-service:5001/api/products').json()
     return render_template('index.html', products=products)
 
