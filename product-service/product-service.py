@@ -3,6 +3,8 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
+INSTANA_SERVICE_NAME = "product-service"
+
 #Instana
 print(dir(instana))
 tracer = instana.tracer  # instana 내 tracer 객체 직접 사용

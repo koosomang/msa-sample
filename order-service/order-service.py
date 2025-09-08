@@ -4,6 +4,8 @@ import requests   # 누락 시 추가!
 
 app = Flask(__name__)
 
+INSTANA_SERVICE_NAME = "order-service"
+
 #Instana
 print(dir(instana))
 tracer = instana.tracer  # instana 내 tracer 객체 직접 사용

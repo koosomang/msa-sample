@@ -5,6 +5,11 @@ import requests
 app = Flask(__name__)
 
 ORDER_SERVICE_URL = 'http://order-service:5002/create_order'
+INSTANA_SERVICE_NAME = "user-service"
+
+#Instana
+print(dir(instana))
+tracer = instana.tracer  # instana 내 tracer 객체 직접 사용
 
 @app.route('/', methods=['GET'])
 def index():

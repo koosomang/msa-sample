@@ -4,11 +4,11 @@ FROM python:3.11-slim
 ENV AUTOWRAPT_BOOTSTRAP=instana
 
 WORKDIR /app
-COPY app.py .
+COPY product-service.py .
 COPY templates ./templates
 
 RUN pip install flask
 RUN pip install instana
 
-CMD ["python", "app.py"]
+CMD ["python", "product-service.py"]
 
