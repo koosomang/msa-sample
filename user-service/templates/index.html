@@ -9,6 +9,11 @@
         alert("상품을 선택해 주세요!");
         return;
       }
+/*
+      if(someErrorCondition){
+        throw new Error("Instana 테스트용 강제 에러 - 주문 처리 중");
+      }
+*/
       const resp = await fetch('/order', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -40,6 +45,12 @@
   </script>
   <script defer crossorigin="anonymous" src="https://automation.ibmce-kr.com/eum/1.7.5/eum.min.js" 
    integrity="sha384-HJjb3vveemdYNUfM1D28dTeXpPPbwPWJinH9ldaGt3KxCO0PNRc4Jb3oQIxMmJMk"></script>
+<script>
+  // 기존 sendOrder 아래나 같은 영역에 추가
+  function forceError() {
+    throw new Error("Instana 테스트용 강제 에러 발생");
+  }
+</script>
 </head>
 <body>
   <h1>상품 선택 및 주문 (user-service)</h1>
@@ -51,6 +62,19 @@
     <button type="submit">주문하기</button>
   </form>
   <div id="result"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 테스트용 에러 발생 버튼 추가
+    const btn = document.createElement('button');
+    btn.innerText = '에러 발생 테스트';
+    btn.onclick = () => {
+      throw new Error("Instana 테스트용 강제 에러 - 버튼 클릭");
+    };
+    document.body.appendChild(btn);
+  });
+</script>
+
 </body>
 </html>
 

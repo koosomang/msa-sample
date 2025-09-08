@@ -1,2 +1,6 @@
 .env
 *.tar
+__pycache__/
+instana_span_test.py
+test.py
+venv/

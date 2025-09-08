@@ -20,6 +20,10 @@ def index():
 @app.route('/order', methods=['POST'])
 def create_order():
     product_ids = request.json.get('product_ids', [])
+    # 강제 에러 조건
+    if 'error' in product_ids:
+        return jsonify({"error": "강제 발생시킨 주문 처리 에러"}), 500
+
     resp = requests.post(ORDER_SERVICE_URL, json={"product_ids": product_ids})
     order_result = resp.json() if resp.ok else {"error": "Order failed"}
     return jsonify(order_result)
