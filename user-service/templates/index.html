@@ -2,6 +2,39 @@
 <html>
 <head>
   <title>주문 페이지 (user-service)</title>
+  <style>
+    #app-name-input {
+      position: fixed;
+      top: 10px;
+      right: 140px;
+      width: 200px;
+      padding: 6px;
+      z-index: 1000;
+    }
+    #release-message-input {
+      position: fixed;
+      top: 45px;  /* app-name-input 바로 아래 */
+      right: 140px;
+      width: 200px;
+      padding: 6px;
+      z-index: 1000;
+    }
+    #release-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #007bff;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    #release-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
   <script>
     async function sendOrder() {
       const selected = Array.from(document.querySelectorAll('input[name="product_ids"]:checked')).map(cb => cb.value);
@@ -53,6 +86,15 @@
 </script>
 </head>
 <body>
+  <!-- 애플리케이션 이름 입력 -->
+  <input id="app-name-input" type="text" placeholder="애플리케이션 이름 입력" />
+
+  <!-- 보낼 메시지 입력창 -->
+  <input id="release-message-input" type="text" placeholder="보낼 메시지 입력" />
+
+  <!-- Release Mark 버튼 -->
+  <button id="release-btn" onclick="sendReleaseMark()">Release Mark 보내기</button>
+
   <h1>상품 선택 및 주문 (user-service)</h1>
   <form onsubmit="event.preventDefault(); sendOrder();">
     {% for p in products %}
@@ -74,6 +116,9 @@
     document.body.appendChild(btn);
   });
 </script>
+
+  <!-- JavaScript 파일 불러오기 -->
+  <script src="/static/js/release_mark.js"></script>
 
 </body>
 </html>

@@ -1,3 +1,5 @@
 AUTOWRAPT_BOOTSTRAP=instana
-INSTANA_AGENT_HOST=instana-agent
+INSTANA_AGENT_HOST=instana-agent-acceptor
 INSTANA_AGENT_PORT=42699
+INSTANA_API_URL=https://{instana host}/api/releases
+INSTANA_API_TOKEN={instana token}

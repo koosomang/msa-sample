@@ -2,6 +2,9 @@
 
 set -e
 
+# .env 파일에서 변수 로드
+source .env
+
 # 함수: 이미지가 이미 존재하면 true 반환
 image_exists() {
   sudo ctr -n k8s.io images ls | grep -q "$1"
@@ -49,3 +52,27 @@ kubectl delete pod --all -n msa-sample
 
 echo "Deployment update completed."
 
+
+AUTH_HEADER="Authorization: apiToken $INSTANA_API_TOKEN"
+CONTENT_HEADER="Content-Type: application/json"
+CURRENT_TIME_MS=$(date +%s%3N)
+
+json_payload=$(cat <<EOF
+{
+  "name": "v.1.1",
+  "start": $CURRENT_TIME_MS,
+  "applications": [
+    {
+      "name": "{user-name}-test-application"
+    }
+  ]
+}
+EOF
+)
+
+#echo "Starting pipeline feedback ..."
+#curl -k --location --request POST "$INSTANA_API_URL" \
+#  -H "$AUTH_HEADER" -H "$CONTENT_HEADER" \
+#  --data "$json_payload"
+#
+#echo "Pipeline feedback started."
